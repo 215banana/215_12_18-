@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-hant">
+    <head>
+        <meta name="author" content="215banana">
+        <meta name="description" content="自主學習成果">
+        <meta name="viewport" content="width=device-width, initial scale=1.0">
+        <meta charset="UTF-8">
+        <title>凱邱千</title>
+        <link rel="stylesheet" href="main.css" type="text/css">
+        <link rel="icon" href="img/Dogecoin_Logo.png" type="image/x-icon">
+    </head>
+
+    <body>
+        <header class="main-header">
+            <div class="header-content container">
+            <h1>Je suis comme ye suis</h1>
+            <hr>
+            <div style="width: 100%">
+            <nav aria-label="main-navigation" class="main-nav" style="margin-left: auto;margin-right: 0;" >
+                <ul>
+                    <li><a href="#">最新動態</a></li>
+                    <li><a href="index.html">主頁</a></li>
+                    <li><a href="contact.html">傳gmail給我們</a></li>
+                </ul>
+            </nav>
+            </div>
+            </div>
+        </header>
+        <main class="content wrapper container">
+            <article id="news" class="article-block">
+                <div class="marquee-container">
+                    <div class="marquee" >
+                        <div class="text-before-time">
+                            現在時間是: 
+                        </div>
+                        <div id="date-time">
+
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article id="about" class="article-block">
+                <h2>加密語言</h2>
+
+<br>
+                <div class="div1">
+                    加密語言就是把原本看得懂的訊息，用特定演算法或規則變成看不懂的內容，稱為「密文」， <br>這樣就只有知道公鑰和私鑰的人才能看懂。
+                    這種做法可以保護資料不被亂看或亂改，<br>像是在網路上購物、銀行轉帳，或傳送重要文件時，這些資料都會經過加密處理。<br>從以前的簡單替換密碼，到現在用在區塊鏈的先進技術。
+                    <br>以下是一些範例:
+                </div>
+            </article>
+            <article id="encryption-methods" class="article-block">
+                <h2>加密方法選擇</h2>
+                <div class="encryption-selector-wrapper">
+                    <button class="scroll-btn left" onclick="scrollSelector(-1)">&#8592;</button>
+                    <div class="encryption-selector" id="method-tabs">
+                        <button onclick="showMethod('caesar')">Caesar 加密</button>
+                        <button onclick="showMethod('xor')">XOR 加密</button>
+                        <button onclick="showMethod('base64')">Base64 編碼</button>
+                        <button onclick="showMethod('hashing')">雜湊</button>
+                    
+                    </div>
+                    <button class="scroll-btn right" onclick="scrollSelector(1)">&#8594;</button>
+                </div>
+            
+                <div class="method-content" id="caesar">
+                    <h3>Caesar 加密</h3>
+                    <p>將每個字母依照固定位移來替換，例如：<code>HELLO</code> ➝ <code>KHOOR</code>（位移3）</p>
+                    <div class="encryption-card">
+                        <label for="input-caesar">輸入文字：</label>
+                        <input type="text" id="input-caesar" placeholder="輸入文字..." oninput="updateCaesar()">
+                        <label for="shift-amount">輸入位移量:</label>
+                        <input type="number" id="shift-amount" placeholder="輸入位移量" oninput="updateCaesar()">
+                        <div class="output-box">
+                            <span>加密結果：</span>
+                            <p id="output-caesar" class="result-text"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="method-content" id="xor">
+                    <h3>XOR 加密</h3>
+                    <p>使用一個金鑰對原文字進行 XOR 運算。<br>範例：<code>Text = 01001000</code>, <code>Key = 00101100</code> ➝ <code>Result = 01100100</code></p>
+                    <div class="encryption-card">
+                        <label for="input-xor">輸入文字：</label>
+                        <input type="text" id="input-xor" placeholder="輸入文字..." oninput="updateXOR()">
+                        <label for="key">輸入key值:</label>
+                        <input type="number" id="key" placeholder="輸入key值:" oninput="updateXOR()">
+                        <div class="output-box">
+                            <span>加密結果：</span>
+                            <p id="output-xor" class="result-text"></p>
+                        </div>
+                </div>
+            </div>
+                <div class="method-content" id="base64">
+                    <h3>Base64 編碼</h3>
+                    <p>將資料轉換成Base64的語法，例如：<code>Hello</code> ➝ <code>SGVsbG8=</code></p>
+                    <div class="encryption-card">
+                        <label for="input-base64">輸入文字：</label>
+                        <input type="text" id="input-base64" placeholder="輸入文字..." oninput="updateBase64()">
+                        <div class="output-box">
+                            <span>加密結果：</span>
+                            <p id="output-base64" class="result-text"></p>
+                        </div>
+                </div>
+                </div>
+                <div class="method-content" id="hashing">
+                    <h3>雜湊</h3>
+                    <p>不可逆加密，常用於密碼儲存，利用SHA256為加密方法。例如：<code>password</code> ➝ <code>5f4dcc3b5aa765d61d8327deb882cf99</code> (MD5)</p>
+                    <div class="encryption-card">
+                        <label for="input-hash">輸入文字：</label>
+                        <input type="text" id="input-hash" placeholder="輸入文字..." oninput="updateHash()">
+                        <div class="output-box">
+                            <span>加密結果：</span>
+                            <p id="output-hash" class="result-text"></p>
+                        </div>
+                </div>
+                </div>
+               
+
+                <p>
+                    其實這幾中真的算能用的加密只有雜湊而已，因為其他的方法皆可逆因此安全性不佳。
+                </p>
+            </article>
+
+        </main>
+        <footer class="footer">
+            <div class="footer-content container">
+                <p>Copyright &copy; 215banana</p>
+            </div>
+        </footer>
+<script>
+            // Function to update live date and time
+            function updateDateTime() {
+                const dateTimeElement = document.getElementById("date-time");
+                const now = new Date();
+    
+                const day = now.getDate().toString().padStart(2, "0");
+                const month = (now.getMonth() + 1).toString().padStart(2, "0"); // Months are 0-based
+                const year = now.getFullYear();
+    
+                const hours = now.getHours().toString().padStart(2, "0");
+                const minutes = now.getMinutes().toString().padStart(2, "0");
+                const seconds = now.getSeconds().toString().padStart(2, "0");
+    
+                const formattedDate = `${year}/${month}/${day}`;
+                const formattedTime = `${hours}:${minutes}:${seconds}`;
+    
+                dateTimeElement.textContent = `${formattedDate} - ${formattedTime}`;
+            }
+    
+            // Update every second
+            setInterval(updateDateTime, 1000);
+            updateDateTime(); // Initial call to set the time immediately
+            function showMethod(id) {
+                const contents = document.querySelectorAll('.method-content');
+                contents.forEach(c => c.classList.remove('active'));
+                document.getElementById(id).classList.add('active');
+            }
+        
+            // Show default tab
+            showMethod('caesar');
+        
+            function scrollSelector(direction) {
+                const container = document.getElementById('method-tabs');
+                const scrollAmount = 100;
+                container.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+            }
+            function updateCaesar() {
+                const text = document.getElementById("input-caesar").value;
+                const shift = document.getElementById("shift-amount").value;
+                let result = "";
+        
+                for (let char of text) {
+                    const code = char.charCodeAt(0);
+                    if (char >= 'A' && char <= 'Z') {
+                        result += String.fromCharCode((code - 65 + shift) % 26 + 65);
+                    } else if (char >= 'a' && char <= 'z') {
+                        result += String.fromCharCode((code - 97 + shift) % 26 + 97);
+                    } else {
+                        result += char;
+                    }
+                }
+        
+                document.getElementById("output-caesar").textContent = result;
+            }
+        
+            function updateXOR() {
+                const key = document.getElementById("key").value; // 固定金鑰
+                const text = document.getElementById("input-xor").value;
+                let result = "";
+        
+                for (let char of text) {
+                    result += String.fromCharCode(char.charCodeAt(0) ^ key);
+                }
+        
+                document.getElementById("output-xor").textContent = result;
+            }
+        
+            function updateBase64() {
+                const text = document.getElementById("input-base64").value;
+                try {
+                    const encoded = btoa(text);
+                    document.getElementById("output-base64").textContent = encoded;
+                } catch (e) {
+                    document.getElementById("output-base64").textContent = "⚠️ 無法編碼";
+                }
+            }
+        
+            async function updateHash() {
+                const text = document.getElementById("input-hash").value;
+                const encoder = new TextEncoder();
+                const data = encoder.encode(text);
+                const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+                const hashArray = Array.from(new Uint8Array(hashBuffer));
+                const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+                document.getElementById("output-hash").textContent = hashHex;
+            }
+            function showMethod(id) {
+                const contents = document.querySelectorAll('.method-content');
+                contents.forEach(c => c.classList.remove('active'));
+                document.getElementById(id).classList.add('active');
+            
+                const btns = document.querySelectorAll('#method-tabs button');
+                btns.forEach(b => {
+                    b.classList.remove('active-tab');
+                    if (b.getAttribute('onclick').includes(id)) {
+                        b.classList.add('active-tab');
+                    }
+                });
+            
+                currentIndex = methods.indexOf(id);
+            }
+            function scrollToButton(index) {
+                const container = document.getElementById('method-tabs');
+                const btns = container.querySelectorAll('button');
+                const target = btns[index];
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+                    btns.forEach(b => b.classList.remove('active-tab'));
+                    target.classList.add('active-tab');
+                }
+            }
+       
+
+        </script>
+    
+    </body>
+</html>

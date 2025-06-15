@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-hant">
+    <head>
+        <meta name="author" content="215banana">
+        <meta name="description" content="自主學習成果">
+        <meta name="viewport" content="width=device-width, initial scale=1.0">
+        <meta charset="UTF-8">
+        <title>凱邱千</title>
+        <link rel="stylesheet" href="main.css" type="text/css">
+        <link rel="icon" href="img/Dogecoin_Logo.png" type="image/x-icon">
+    </head>
+
+    <body>
+        <header class="main-header">
+            <div class="header-content container">
+            <h1>Je suis comme ye suis</h1>
+            <hr>
+            <div style="width: 100%">
+            <nav aria-label="main-navigation" class="main-nav" style="margin-left: auto;margin-right: 0;" >
+                <ul>
+                    <li><a href="#">最新動態</a></li>
+                    <li><a href="index.html">主頁</a></li>
+                    <li><a href="encrypt.html">什麼是加密語言</a></li>
+                </ul>
+            </nav>
+            </div>
+            </div>
+        </header>
+        <main class="content wrapper container">
+            <article id="news" class="article-block">
+                <div class="marquee-container">
+                    <div class="marquee" >
+                        <div class="text-before-time">
+                            現在時間是: 
+                        </div>
+                        <div id="date-time">
+
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article id="about" class="article-block">
+                <h2>聯繫我們</h2>
+
+<br>
+                <div class="div1">
+                    給一些網站的建議，以後有機會會改
+                </div>
+            </article>
+            
+           <article class="article-block1">
+            <div class="contact-section">
+                <div class="contact-form">
+            <form action="https://formspree.io/f/meokazpn" method="POST">
+            <fieldset>
+                <legend class="legend">回饋</legend>
+                <div class="input-group">
+                <label for="姓名">你的名字</label> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp; &nbsp;
+                <label for="email">你的email</label> <br>
+            <input name="姓名" type="text" placeholder="姓名">
+            
+            <input type="email" placeholder="email" id="email" name="Email" required>
+          
+          <Br>
+          <label for="message">Your message</label>
+          <br>
+          <textarea name="message" id="message" cols="30" rows="10" placeholder="Type your message here"></textarea>
+        
+        <br>
+        <!-- <input type="submit" value="submit"> -->
+        <button class="button" type="submit">Submit</button>
+        <button class="button" type="reset">Reset</button>
+        </fieldset>
+        </form>
+        </div>
+        </div>
+        </div>
+           </article>
+        </main>
+        <footer class="footer">
+            <div class="footer-content container">
+                <p>Copyright &copy; 215banana</p>
+            </div>
+        </footer>
+<script>
+            // Function to update live date and time
+            function updateDateTime() {
+                const dateTimeElement = document.getElementById("date-time");
+                const now = new Date();
+    
+                const day = now.getDate().toString().padStart(2, "0");
+                const month = (now.getMonth() + 1).toString().padStart(2, "0"); // Months are 0-based
+                const year = now.getFullYear();
+    
+                const hours = now.getHours().toString().padStart(2, "0");
+                const minutes = now.getMinutes().toString().padStart(2, "0");
+                const seconds = now.getSeconds().toString().padStart(2, "0");
+    
+                const formattedDate = `${year}/${month}/${day}`;
+                const formattedTime = `${hours}:${minutes}:${seconds}`;
+    
+                dateTimeElement.textContent = `${formattedDate} - ${formattedTime}`;
+            }
+    
+            // Update every second
+            setInterval(updateDateTime, 1000);
+            updateDateTime(); // Initial call to set the time immediately
+        </script>
+    
+    </body>
+</html>

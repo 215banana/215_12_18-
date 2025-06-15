@@ -1,56 +1,89 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>caoifawagnt</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 50px;
-      background-color: #f0f0f0;
-    }
-    h1 { text-align: center; }
-    textarea, input, button {
-      display: block;
-      margin: 10px 0;
-      width: 100%;
-      padding: 10px;
-    }
-    button { background-color: #007BFF; color: white; border: none; cursor: pointer; }
-  </style>
-</head>
-<body>
-  <h1>Test1</h1>
-  <textarea id="inputText" placeholder="Enter text to encrypt..."></textarea>
-  <input id="key" type="text" placeholder="Enter encryption key..." />
-  <button onclick="encryptText()">Encrypt</button>
-  <button onclick="decryptText()">Decrypt</button>
-  <h3>Output:</h3>
-  <textarea id="outputText" readonly></textarea>
+<html lang="zh-hant">
+    <head>
+        <meta name="author" content="215banana">
+        <meta name="description" content="自主學習成果">
+        <meta name="viewport" content="width=device-width, initial scale=1.0">
+        <meta charset="UTF-8">
+        <title>凱邱千</title>
+        <link rel="stylesheet" href="main.css" type="text/css">
+        <link rel="icon" href="img/Dogecoin_Logo.png" type="image/x-icon">
+    </head>
 
-  <script>
-    function encryptText() {
-      const text = document.getElementById('inputText').value;
-      const key = document.getElementById('key').value;
-      const encrypted = btoa(text + key); // Simple base64 encryption
-      document.getElementById('outputText').value = encrypted;
-    }
+    <body>
+        <header class="main-header">
+            <div class="header-content container">
+            <h1>Je suis comme ye suis</h1>
+            <hr>
+            <div style="width: 100%">
+            <nav aria-label="main-navigation" class="main-nav" style="margin-left: auto;margin-right: 0;" >
+                <ul>
+                    <li><a href="#">最新動態</a></li>
+                <li><a href="#news">本站介紹</a></li> &nbsp;
+                
+                <li><a href="#money">關於加密貨幣</a></li>&nbsp;
+                <li><a href="contact.html">傳gmail給我們</a></li>
+                <li><a href="encrypt.html">什麼是加密語言</a></li>
+                </ul>
+            </nav>
+            </div>
+            </div>
+        </header>
+        <main class="content wrapper container">
+            <article id="news" class="article-block">
+                <div class="marquee-container">
+                    <div class="marquee" >
+                        <div class="text-before-time">
+                            現在時間是: 
+                        </div>
+                        <div id="date-time">
 
-    function decryptText() {
-      const encrypted = document.getElementById('inputText').value;
-      const key = document.getElementById('key').value;
-      try {
-        const decrypted = atob(encrypted);
-        if (decrypted.endsWith(key)) {
-          document.getElementById('outputText').value = decrypted.slice(0, -key.length);
-        } else {
-          alert('Invalid key!');
-        }
-      } catch (e) {
-        alert('Invalid encrypted text!');
-      }
-    }
-  </script>
-</body>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <article id="about" class="article-block">
+                <h2>自主學習</h2>
+                <p>
+                    這是用來將我們這學期所學統整起來的網站
+                </p>
+<br>
+                <div class="div1">
+                    包括:加密貨幣的運作原理、字元編碼的方式、一些加密方法
+                </div>
+            </article>
+            
+
+        </main>
+        <footer class="footer">
+            <div class="footer-content container">
+                <p>Copyright &copy; 215banana</p>
+            </div>
+        </footer>
+        <script>
+            // Function to update live date and time
+            function updateDateTime() {
+                const dateTimeElement = document.getElementById("date-time");
+                const now = new Date();
+    
+                const day = now.getDate().toString().padStart(2, "0");
+                const month = (now.getMonth() + 1).toString().padStart(2, "0"); // Months are 0-based
+                const year = now.getFullYear();
+    
+                const hours = now.getHours().toString().padStart(2, "0");
+                const minutes = now.getMinutes().toString().padStart(2, "0");
+                const seconds = now.getSeconds().toString().padStart(2, "0");
+    
+                const formattedDate = `${year}/${month}/${day}`;
+                const formattedTime = `${hours}:${minutes}:${seconds}`;
+    
+                dateTimeElement.textContent = `${formattedDate} - ${formattedTime}`;
+            }
+    
+            // Update every second
+            setInterval(updateDateTime, 1000);
+            updateDateTime(); // Initial call to set the time immediately
+        </script>
+    
+    </body>
 </html>

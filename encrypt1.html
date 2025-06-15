@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="zh-hant">
+<head>
+    <meta name="author" content="215banana">
+    <meta name="description" content="自主學習成果">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>凱邱千</title>
+    <link rel="stylesheet" href="main.css" type="text/css">
+    <link rel="icon" href="img/Dogecoin_Logo.png" type="image/x-icon">
+    <!-- Tailwind CSS CDN for styling -->
+
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content container">
+            <h1>Je suis comme ye suis</h1>
+            <hr>
+            <div style="width: 100%">
+                <nav aria-label="main-navigation" class="main-nav" style="margin-left: auto;margin-right: 0;" >
+                    <ul>
+                        <li><a href="#">最新動態</a></li>
+                        <li><a href="index.html">主頁</a></li>
+                        <li><a href="contact.html">傳gmail給我們</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <main class="content wrapper container">
+        <article id="news" class="article-block">
+            <div class="marquee-container">
+                <div class="marquee" >
+                    <div class="text-before-time">
+                        現在時間是: 
+                    </div>
+                    <div id="date-time">
+
+                    </div>
+                </div>
+            </div>
+        </article>
+        <article id="about" class="article-block">
+            <h2>加密語言</h2>
+
+            <br>
+            <div class="div1">
+                加密語言就是把原本看得懂的訊息，用特定演算法或規則變成看不懂的內容，稱為「密文」， <br>這樣就只有知道公鑰和私鑰的人才能看懂。
+                這種做法可以保護資料不被亂看或亂改，<br>像是在網路上購物、銀行轉帳，或傳送重要文件時，這些資料都會經過加密處理。<br>從以前的簡單替換密碼，到現在用在區塊鏈的先進技術。
+                <br>以下是一些範例:
+            </div>
+        </article>
+        <article id="encryption-methods" class="article-block">
+            <h2>加密方法選擇</h2>
+            <div class="encryption-selector-wrapper">
+                <button class="scroll-btn left" onclick="scrollSelector(-1)">&#8592;</button>
+                <div class="encryption-selector" id="method-tabs">
+                    <button onclick="showMethod('caesar')">Caesar 加密</button>
+                    <button onclick="showMethod('xor')">XOR 加密</button>
+                    <button onclick="showMethod('base64')">Base64 編碼</button>
+                    <button onclick="showMethod('hashing')">雜湊</button>
+                    <button onclick="showMethod('rsa')">RSA加密</button>
+                </div>
+                <button class="scroll-btn right" onclick="scrollSelector(1)">&#8594;</button>
+            </div>
+            
+            <div class="method-content" id="caesar">
+                <h3>Caesar 加密</h3>
+                <p>將每個字母依照固定位移來替換，例如：<code>HELLO</code> ➝ <code>KHOOR</code>（位移3）</p>
+                <div class="encryption-card">
+                    <label for="input-caesar">輸入文字：</label>
+                    <input type="text" id="input-caesar" placeholder="輸入文字..." oninput="updateCaesar()">
+                    <label for="shift-amount">輸入位移量:</label>
+                    <input type="number" id="shift-amount" placeholder="輸入位移量" oninput="updateCaesar()">
+                    <div class="output-box">
+                        <span>加密結果：</span>
+                        <p id="output-caesar" class="result-text"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="method-content" id="xor">
+                <h3>XOR 加密</h3>
+                <p>使用一個金鑰對原文字進行 XOR 運算。<br>範例：<code>Text = 01001000</code>, <code>Key = 00101100</code> ➝ <code>Result = 01100100</code></p>
+                <div class="encryption-card">
+                    <label for="input-xor">輸入文字：</label>
+                    <input type="text" id="input-xor" placeholder="輸入文字..." oninput="updateXOR()">
+                    <label for="key">輸入key值:</label>
+                    <input type="number" id="key" placeholder="輸入key值:" oninput="updateXOR()">
+                    <div class="output-box">
+                        <span>加密結果：</span>
+                        <p id="output-xor" class="result-text"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="method-content" id="base64">
+                <h3>Base64 編碼</h3>
+                <p>將資料轉換成只包含英文字母、數字和符號的格式，例如：<code>Hello</code> ➝ <code>SGVsbG8=</code></p>
+                <div class="encryption-card">
+                    <label for="input-base64">輸入文字：</label>
+                    <input type="text" id="input-base64" placeholder="輸入文字..." oninput="updateBase64()">
+                    <div class="output-box">
+                        <span>加密結果：</span>
+                        <p id="output-base64" class="result-text"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="method-content" id="hashing">
+                <h3>雜湊</h3>
+                <p>不可逆加密，常用於密碼儲存。例如：<code>password</code> ➝ <code>5f4dcc3b5aa765d61d8327deb882cf99</code> (MD5)</p>
+                <div class="encryption-card">
+                    <label for="input-hash">輸入文字：</label>
+                    <input type="text" id="input-hash" placeholder="輸入文字..." oninput="updateHash()">
+                    <div class="output-box">
+                        <span>加密結果：</span>
+                        <p id="output-hash" class="result-text"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="method-content" id="rsa">
+                <!-- Message Box for RSA -->
+                <div class="message-box" id="messageBox">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span id="messageText"></span>
+                </div>
+
+                <h3 class="section-title">RSA 加密/解密示範</h3>
+
+                <p class="text-sm text-gray-600 -mt-4 mb-4">
+                    一個rsa的範例。實際上n跟e會更大
+                    
+                </p>
+
+                <!-- Key Input Section -->
+                <div class="input-group">
+                    <label for="nInput">模數 (n):</label>
+                    <input type="text" id="nInput" placeholder="輸入 n (例如：11413)" value="11413">
+                </div>
+                <div class="input-group">
+                    <label for="eInput">公鑰指數 (e):</label>
+                    <input type="text" id="eInput" placeholder="輸入 e (例如：7)" value="7">
+                </div>
+                <div class="input-group">
+                    <label for="dInput">私鑰指數 (d):</label>
+                    <input type="text" id="dInput" placeholder="輸入 d (例如：1619)" value="1619">
+                </div>
+
+                <!-- Encryption Section -->
+                <h2 class="section-title">加密</h2>
+                <div class="input-group">
+                    <label for="plaintextInput">明文:</label>
+                    <textarea id="plaintextInput" rows="4" placeholder="輸入要加密的文字 (例如：Hello World!)"></textarea>
+                </div>
+                <div class="button-row">
+                    <button id="encryptButton" class="action-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v3h8z" />
+                        </svg>
+                        加密
+                    </button>
+                </div>
+                <div class="input-group">
+                    <label>密文:</label>
+                    <div id="ciphertextOutput" class="output-area select-all"></div>
+                </div>
+                <div class="button-row">
+                    <button id="copyCiphertextButton" class="action-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        複製密文
+                    </button>
+                </div>
+
+                <!-- Decryption Section -->
+                <h2 class="section-title">解密</h2>
+                <div class="input-group">
+                    <label for="ciphertextInput">要解密的密文:</label>
+                    <textarea id="ciphertextInput" rows="4" placeholder="在此貼上密文"></textarea>
+                </div>
+                <div class="button-row">
+                    <button id="decryptButton" class="action-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0v4m-4 2v5m-6 0h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+                        </svg>
+                        解密
+                    </button>
+                </div>
+                <div class="input-group">
+                    <label>解密後的明文:</label>
+                    <div id="decryptedOutput" class="output-area select-all"></div>
+                </div>
+                <div class="button-row">
+                    <button id="copyDecryptedButton" class="action-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                        </svg>
+                        複製解密文字
+                    </button>
+                </div>
+            </div>
+
+            <p>
+                其實這幾種真的算能用的加密只有雜湊和RSA加密而已，因為其他的方法皆可逆因此安全性不佳。
+            </p>
+        </article>
+
+    </main>
+    <footer class="footer">
+        <div class="footer-content container">
+            <p>Copyright &copy; 215banana</p>
+        </div>
+    </footer>
+    <script>
+        // Function to update live date and time
+        function updateDateTime() {
+            const dateTimeElement = document.getElementById("date-time");
+            const now = new Date();
+        
+            const day = now.getDate().toString().padStart(2, "0");
+            const month = (now.getMonth() + 1).toString().padStart(2, "0"); // Months are 0-based
+            const year = now.getFullYear();
+        
+            const hours = now.getHours().toString().padStart(2, "0");
+            const minutes = now.getMinutes().toString().padStart(2, "0");
+            const seconds = now.getSeconds().toString().padStart(2, "0");
+        
+            const formattedDate = `${year}/${month}/${day}`;
+            const formattedTime = `${hours}:${minutes}:${seconds}`;
+        
+            dateTimeElement.textContent = `${formattedDate} - ${formattedTime}`;
+        }
+        
+        // Update every second
+        setInterval(updateDateTime, 1000);
+        updateDateTime(); // Initial call to set the time immediately
+
+        // Function to display messages to the user (adapted for existing design)
+        function showMessage(message, type = 'info') {
+            const messageBox = document.getElementById('messageBox');
+            const messageText = document.getElementById('messageText');
+
+            if (!messageBox || !messageText) {
+                console.error("Message box elements not found.");
+                return;
+            }
+
+            messageText.textContent = message;
+            messageBox.className = 'message-box show'; // Show the box
+
+            // Reset previous type styles
+            messageBox.style.backgroundColor = '';
+            messageBox.style.color = '';
+            messageBox.style.borderColor = '';
+
+            // Set different background/text colors based on type
+            if (type === 'error') {
+                messageBox.style.backgroundColor = '#fed7d7'; // Light red
+                messageBox.style.color = '#822727'; // Dark red
+                messageBox.style.borderColor = '#fc8181';
+            } else if (type === 'success') {
+                messageBox.style.backgroundColor = '#c6f6d5'; // Light green
+                messageBox.style.color = '#22543d'; // Dark green
+                messageBox.style.borderColor = '#68d391';
+            } else { // info
+                messageBox.style.backgroundColor = '#fefcbf'; // Light yellow
+                messageBox.style.color = '#744210'; // Dark brown
+                messageBox.style.borderColor = '#fbd38d';
+            }
+
+            // Hide the message after 5 seconds
+            setTimeout(() => {
+                messageBox.classList.remove('show'); // Hide the box
+            }, 5000);
+        }
+
+        // Modular exponentiation: (base^exp) % mod
+        // Uses BigInt for large number arithmetic
+        function modPow(base, exp, mod) {
+            let res = 1n; // Result variable, initialized to 1 (as BigInt)
+            base %= mod; // Ensure base is within the modulo range
+
+            // Loop while exponent is greater than 0
+            while (exp > 0n) {
+                // If exponent is odd, multiply result with base
+                if (exp % 2n === 1n) {
+                    res = (res * base) % mod;
+                }
+                // Square the base and halve the exponent for next iteration
+                base = (base * base) % mod;
+                exp /= 2n;
+            }
+            return res;
+        }
+
+        // Converts a string to an array of BigInt character codes
+        // Each character's UTF-16 code point is treated as a number
+        function stringToNumbers(str) {
+            const numbers = [];
+            for (let i = 0; i < str.length; i++) {
+                numbers.push(BigInt(str.charCodeAt(i)));
+            }
+            return numbers;
+        }
+
+        // Converts an array of BigInt numbers back to a string
+        function numbersToString(numbers) {
+            let str = '';
+            for (let i = 0; i < numbers.length; i++) {
+                // Convert BigInt back to a regular number for String.fromCharCode
+                str += String.fromCharCode(Number(numbers[i]));
+            }
+            return str;
+        }
+
+        // Function to handle encryption
+        function encrypt() {
+            try {
+                // Get input values and convert them to BigInt
+                const n = BigInt(document.getElementById('nInput').value);
+                const e = BigInt(document.getElementById('eInput').value);
+                const plaintext = document.getElementById('plaintextInput').value;
+
+                // Basic validation
+                if (n <= 0n || e <= 0n) {
+                    showMessage('請輸入 n 和 e 的有效正數值。', 'error');
+                    return;
+                }
+                if (plaintext.length === 0) {
+                    showMessage('請輸入要加密的明文。', 'error');
+                    return;
+                }
+
+                // Convert plaintext characters to numbers
+                const numbers = stringToNumbers(plaintext);
+
+                // Encrypt each number: C = M^e mod n
+                const ciphertextNumbers = numbers.map(m => {
+                    // Check if message character value is less than n (a fundamental RSA requirement)
+                    if (m >= n) {
+                        showMessage(`字符值 '${String.fromCharCode(Number(m))}' (${m}) 對於給定的 'n' (${n}) 太大。加密可能不準確。`, 'error');
+                        // For demonstration, we'll proceed but this indicates a problem in real RSA
+                    }
+                    return modPow(m, e, n);
+                });
+
+                // Display the ciphertext (as space-separated numbers)
+                document.getElementById('ciphertextOutput').textContent = ciphertextNumbers.join(' ');
+                showMessage('文字已成功加密！', 'success');
+
+                // Auto-fill ciphertext input for decryption
+                document.getElementById('ciphertextInput').value = ciphertextNumbers.join(' ');
+
+            } catch (error) {
+                // Catch any errors during the process, e.g., invalid BigInt conversion
+                showMessage('加密失敗: ' + error.message + '。請檢查您的輸入。', 'error');
+                console.error('Encryption error:', error);
+            }
+        }
+
+        // Function to handle decryption
+        function decrypt() {
+            try {
+                // Get input values and convert them to BigInt
+                const n = BigInt(document.getElementById('nInput').value);
+                const d = BigInt(document.getElementById('dInput').value);
+                const ciphertextStr = document.getElementById('ciphertextInput').value;
+
+                // Basic validation
+                if (n <= 0n || d <= 0n) {
+                    showMessage('請輸入 n 和 d 的有效正數值。', 'error');
+                    return;
+                }
+                if (ciphertextStr.length === 0) {
+                    showMessage('請輸入要解密的密文。', 'error');
+                    return;
+                }
+
+                // Parse the space-separated ciphertext numbers into an array of BigInts
+                const ciphertextNumbers = ciphertextStr.split(' ').filter(s => s.trim() !== '').map(s => BigInt(s));
+
+                // Decrypt each number: M = C^d mod n
+                const decryptedNumbers = ciphertextNumbers.map(c => modPow(c, d, n));
+
+                // Convert decrypted numbers back to characters
+                const decryptedText = numbersToString(decryptedNumbers);
+
+                // Display the decrypted plaintext
+                document.getElementById('decryptedOutput').textContent = decryptedText;
+                showMessage('文字已成功解密！', 'success');
+
+            } catch (error) {
+                // Catch any errors during the process
+                showMessage('解密失敗: ' + error.message + '。請檢查您的輸入。', 'error');
+                console.error('Decryption error:', error);
+            }
+        }
+
+        // Function to copy text to clipboard
+        function copyToClipboard(elementId) {
+            const element = document.getElementById(elementId);
+            if (!element || !element.textContent) {
+                showMessage('沒有可複製的內容。', 'info');
+                return;
+            }
+
+            // Create a temporary textarea to hold the text
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = element.textContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select(); // Select the text
+            tempTextArea.setSelectionRange(0, 99999); // For mobile devices
+
+            try {
+                document.execCommand('copy'); // Execute copy command
+                showMessage('已複製到剪貼簿！', 'success');
+            } catch (err) {
+                showMessage('複製失敗。請手動複製。', 'error');
+                console.error('Copy command failed:', err);
+            } finally {
+                document.body.removeChild(tempTextArea); // Remove the temporary textarea
+            }
+        }
+
+        // --- Original user's JavaScript functions ---
+        function showMethod(id) {
+            const contents = document.querySelectorAll('.method-content');
+            contents.forEach(c => c.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        
+            const btns = document.querySelectorAll('#method-tabs button');
+            btns.forEach(b => {
+                b.classList.remove('active-tab');
+                if (b.getAttribute('onclick').includes(id)) {
+                    b.classList.add('active-tab');
+                }
+            });
+            // 移除了之前導致錯誤的未定義變數 'currentIndex' 引用
+        }
+        
+        // Show default tab on load (initially 'caesar')
+        // We'll call this after event listeners are set up for RSA.
+        // showMethod('caesar'); // Initial call is moved to window.onload
+
+        function scrollSelector(direction) {
+            const container = document.getElementById('method-tabs');
+            const scrollAmount = 100;
+            container.scrollBy({ left: scrollAmount * direction, behavior: 'smooth' });
+        }
+        function updateCaesar() {
+            const text = document.getElementById("input-caesar").value;
+            const shift = parseInt(document.getElementById("shift-amount").value, 10);
+            let result = "";
+        
+            if (isNaN(shift)) {
+                document.getElementById("output-caesar").textContent = "請輸入有效的位移量";
+                return;
+            }
+
+            for (let char of text) {
+                const code = char.charCodeAt(0);
+                if (char >= 'A' && char <= 'Z') {
+                    result += String.fromCharCode(((code - 65 + shift) % 26 + 26) % 26 + 65); // Added +26) % 26 for negative shifts
+                } else if (char >= 'a' && char <= 'z') {
+                    result += String.fromCharCode(((code - 97 + shift) % 26 + 26) % 26 + 97); // Added +26) % 26 for negative shifts
+                } else {
+                    result += char;
+                }
+            }
+        
+            document.getElementById("output-caesar").textContent = result;
+        }
+        
+        function updateXOR() {
+            const key = parseInt(document.getElementById("key").value, 10); // Parse key as integer
+            const text = document.getElementById("input-xor").value;
+            let result = "";
+            
+            if (isNaN(key)) {
+                document.getElementById("output-xor").textContent = "請輸入有效的key值";
+                return;
+            }
+
+            for (let char of text) {
+                result += String.fromCharCode(char.charCodeAt(0) ^ key);
+            }
+        
+            document.getElementById("output-xor").textContent = result;
+        }
+        
+        function updateBase64() {
+            const text = document.getElementById("input-base64").value;
+            try {
+                const encoded = btoa(text);
+                document.getElementById("output-base64").textContent = encoded;
+            } catch (e) {
+                document.getElementById("output-base64").textContent = "⚠️ 無法編碼 (可能包含非 ASCII 字符)";
+            }
+        }
+        
+        async function updateHash() {
+            const text = document.getElementById("input-hash").value;
+            const encoder = new TextEncoder();
+            const data = encoder.encode(text);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            document.getElementById("output-hash").textContent = hashHex;
+        }
+        
+        // Add event listeners once the DOM is fully loaded
+        window.onload = function() {
+            // RSA Event Listeners
+            document.getElementById('encryptButton').addEventListener('click', encrypt);
+            document.getElementById('decryptButton').addEventListener('click', decrypt);
+            document.getElementById('copyCiphertextButton').addEventListener('click', () => copyToClipboard('ciphertextOutput'));
+            document.getElementById('copyDecryptedButton').addEventListener('click', () => copyToClipboard('decryptedOutput'));
+            
+            // Show default tab after everything is loaded
+            showMethod('caesar'); 
+        };
+    </script>
+    
+</body>
+</html>
